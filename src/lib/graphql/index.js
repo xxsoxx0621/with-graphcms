@@ -6,5 +6,7 @@ const authorization = `Bearer ${GRAPHCMS_API_KEY}`;
 export default new GraphQLClient(GRAPHCMS_ENDPOINT, {
     headers: {
         ...(GRAPHCMS_API_KEY && {authorization}),
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
     },
 });
