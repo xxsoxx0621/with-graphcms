@@ -2,6 +2,8 @@ import graphql from '@/lib/graphql'
 import getAllProducts from '@/lib/graphql/queries/getAllProducts'
 import getProductDetail from '@/lib/graphql/queries/getProductDetail'
 import {Box, Button, Divider, Flex, Grid, Image, Select, Text} from '@chakra-ui/react'
+import {useContext, useState} from 'react'
+import CartContext from '@/lib/context/Cart'
 
 
 export async function getStaticPaths() {
@@ -48,6 +50,18 @@ function SelectQuantity(props) {
 }
 
 export default function ProductPage({product}) {
+    const [quantity, setQuantity] = useState(0);
+    const {items, setItems} = useContext(CartContext);
+
+    const alreadyInCart = product.id in items;
+
+    function addToCart() {
+        setItems({
+            ...items,
+            [product.id]: quantity,
+        });
+    }
+
     return (
         <Flex rounded="xl" boxShadow="2xl" w="full" p="16" bgColor="white">
             <Image height="96" width="96" src={product.images[0].url}/>
@@ -63,9 +77,9 @@ export default function ProductPage({product}) {
                 </Text>
                 <Divider my="6"/>
                 <Grid gridTemplateColumns="2ftr 1fr" gap="5" alignItems="center">
-                    <SelectQuantity onChange={() => {}}/>
-                    <Button colorSchme="blue">
-                        Add to cart
+                    <SelectQuantity onChange={(quantity) => setQuantity(parseInt(quantity))}/>
+                    <Button colorSchme="blue" onClick={addToCart}>
+                        {alreadyInCart ? 'Update' : 'Add to cart'}
                     </Button>
                 </Grid>
             </Box>
