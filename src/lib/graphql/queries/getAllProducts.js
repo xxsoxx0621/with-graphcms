@@ -1,16 +1,16 @@
 import {gql} from "graphql-request";
 
 export default gql`
-    query getAllProducts {
+ query{
         products {
-            id,
-            name,
-            slug,
-            price,
+            id
+            name
+            slug
+            price
             images{
-                id,
+                id
                 url
             }
         }
-    }
+}
 `;

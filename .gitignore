@@ -218,4 +218,5 @@ sketch
 # .pnp.*
 
 .env.local
+next.config.js
 # End of https://www.toptal.com/developers/gitignore/api/yarn,vercel,nextjs,intellij,react,macos

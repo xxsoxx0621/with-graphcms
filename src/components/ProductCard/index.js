@@ -17,7 +17,12 @@ export default function ProductCard(props) {
                      boxShadow: 'xl',
                      transform: 'scale(1.02)',
                  }}>
-                <Image src={props.images[0]?.url} alt={props.name}/>
+                    <Image priority={true}
+                           src={props.images[0]?.url}
+                           alt={props.name}
+                           width={100}
+                           height={100}
+                           styles={{objectFit: 'cover'}}/>
                 <Divider my="3"/>
                 <Box>
                     <Text fontWeight="bold" textColor="purple" fontSize="lg">
